@@ -12,8 +12,8 @@ object Dependencies {
     const val androidXLifeCycleKtx = "androidx.lifecycle:lifecycle-runtime-ktx:$androidXLifeCycleKtxVersion"
 
     /// Compose
-    const val composeVersion = "1.1.0-beta03"
-    const val composeConstraintLayoutVersion = "1.0.0-rc02"
+    const val composeVersion = "1.1.0"
+    const val composeConstraintLayoutVersion = "1.0.0"
     const val composeActivitiesVersion = "1.4.0"
     const val composeViewModelsVersion = "2.4.0"
     const val accompanistInsetsVersion = "0.22.0-rc"
