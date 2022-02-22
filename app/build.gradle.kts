@@ -3,6 +3,7 @@ plugins {
     id("dagger.hilt.android.plugin")
     kotlin ("android")
     kotlin("kapt")
+    //id("com.google.protobuf") version "0.8.17" apply true
 }
 
 android {
@@ -86,6 +87,13 @@ dependencies {
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.1.1")
+
+    // Jetpack Datastore
+    implementation(Dependencies.dataStore)
+    implementation(Dependencies.dataStoreCore)
+    implementation(Dependencies.dataStorePreferences)
+    implementation(Dependencies.dataStorePreferencesCore)
+    implementation(Dependencies.protobuf)
 
     // tryout
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")

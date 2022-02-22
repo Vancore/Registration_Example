@@ -16,7 +16,6 @@ object Dependencies {
     const val composeConstraintLayoutVersion = "1.0.0-rc02"
     const val composeActivitiesVersion = "1.4.0"
     const val composeViewModelsVersion = "2.4.0"
-    const val accompanistVersion = "0.20.3"
     const val accompanistInsetsVersion = "0.22.0-rc"
     const val landscapistGlideVersion = "1.4.5"
 
@@ -33,7 +32,20 @@ object Dependencies {
     const val composeConstraintLayout = "androidx.constraintlayout:constraintlayout-compose:$composeConstraintLayoutVersion"
     const val composeUITesting = "androidx.compose.ui:ui-test-junit4:$composeVersion" // UI Tests
 
+
+    /// Jetpack DataStore - preferences maybe for later use
+    const val dataStoreVersion = "1.0.0"
+    const val protobufVersion = "3.18.0"
+
+    const val dataStore = "androidx.datastore:datastore:$dataStoreVersion"
+    const val dataStoreCore = "androidx.datastore:datastore-core:$dataStoreVersion"
+    const val dataStorePreferences = "androidx.datastore:datastore-preferences:$dataStoreVersion"
+    const val dataStorePreferencesCore = "androidx.datastore:datastore-preferences-core:$dataStoreVersion"
+    const val protobuf = "com.google.protobuf:protobuf-javalite:$protobufVersion"
+
     /// Accompanist
+    const val accompanistVersion = "0.20.3"
+
     const val accompanistSystemUIController = "com.google.accompanist:accompanist-systemuicontroller:$accompanistVersion"
     const val accompanistInsets = "com.google.accompanist:accompanist-insets:$accompanistInsetsVersion"
     const val accompanistInsetsUi = "com.google.accompanist:accompanist-insets-ui:$accompanistInsetsVersion"
@@ -52,5 +64,5 @@ object Dependencies {
     const val hiltAndroid = "com.google.dagger:hilt-android:$hiltVersion"
     const val hiltCompiler = "com.google.dagger:hilt-compiler:$hiltVersion"
     const val hilt = "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
-    
+
 }
