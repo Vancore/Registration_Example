@@ -31,12 +31,12 @@ fun RegistrationTopBar(title: String) {
     uiMode = Configuration.UI_MODE_NIGHT_YES,
     showBackground = true
 )
-@Composable
 @Preview(
     name = "Registration Top Bar - Light",
     uiMode = Configuration.UI_MODE_NIGHT_NO,
     showBackground = true
 )
+@Composable
 fun RegistrationTopBarPreview() {
     RegistrationZKBTheme {
         RegistrationTopBar(title = "Registration")

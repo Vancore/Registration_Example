@@ -1,8 +1,7 @@
 package com.example.registrationzkb.screens.registration
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.padding
+import android.content.res.Configuration
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -14,6 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.registrationzkb.RegistrationViewModel
 import com.example.registrationzkb.data.RegistrationInput
+import com.example.registrationzkb.ui.theme.RegistrationZKBTheme
 import com.google.accompanist.insets.ProvideWindowInsets
 
 @Composable
@@ -51,7 +51,13 @@ fun RegistrationScreenContent(
     val (currentEmailInput, emailChange) = remember { mutableStateOf("") }
     val (currentBirthdayInput, birthdayChange) = remember { mutableStateOf(0L) }
 
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+
+        Spacer(modifier = Modifier.padding(16.dp))
+
         TextField(
             value = currentNameInput,
             onValueChange = nameChange,
@@ -66,7 +72,7 @@ fun RegistrationScreenContent(
             )
         }
 
-        Spacer(modifier = Modifier.padding(8.dp))
+        Spacer(modifier = Modifier.padding(16.dp))
 
         TextField(
             value = currentEmailInput,
@@ -85,7 +91,7 @@ fun RegistrationScreenContent(
             )
         }
 
-        Spacer(modifier = Modifier.padding(8.dp))
+        Spacer(modifier = Modifier.padding(16.dp))
 
         Button(onClick = {
             validateInput(
@@ -101,8 +107,26 @@ fun RegistrationScreenContent(
     }
 }
 
-@Preview
+@Preview(
+    name = "Registration Top Bar - Dark",
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    showBackground = true
+)
+@Preview(
+    name = "Registration Top Bar - Light",
+    uiMode = Configuration.UI_MODE_NIGHT_NO,
+    showBackground = true
+)
 @Composable
 fun RegistrationScreenPreview() {
-
+    RegistrationZKBTheme {
+        Scaffold(topBar = { RegistrationTopBar(title = "Registration") }) {
+            RegistrationScreenContent(
+                errorInName = false,
+                errorInEmail = true,
+                errorInDate = false,
+                validateInput = {}
+            )
+        }
+    }
 }
