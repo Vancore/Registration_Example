@@ -10,12 +10,16 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import java.util.*
 import javax.inject.Inject
+import javax.inject.Singleton
 
 data class ValidationState(
     val inputIsValid: Boolean = false,
     val nameInputValid: Boolean = false,
     val emailInputValid: Boolean = false,
     val dateInputValid: Boolean = false,
+    val nameInput: String = "",
+    val emailInput: String = "",
+    val dateInput: Long = 0L
 )
 
 class ValidationUseCase @Inject constructor(
@@ -29,12 +33,25 @@ class ValidationUseCase @Inject constructor(
             val nameIsValid = validateName(name = input.name)
             val emailIsValid = validateEmail(email = input.email)
             val dateIsValid = validateDate(date = input.birthday)
-            it.copy(
-                inputIsValid = nameIsValid && emailIsValid && dateIsValid,
-                nameInputValid = nameIsValid,
-                emailInputValid = emailIsValid,
-                dateInputValid = dateIsValid
-            )
+            val inputIsValid = nameIsValid && emailIsValid && dateIsValid
+            if(inputIsValid) {
+                it.copy(
+                    inputIsValid = inputIsValid,
+                    nameInputValid = nameIsValid,
+                    emailInputValid = emailIsValid,
+                    dateInputValid = dateIsValid,
+                    nameInput = input.name,
+                    emailInput = input.email,
+                    dateInput = input.birthday
+                )
+            } else {
+                it.copy(
+                    inputIsValid = inputIsValid,
+                    nameInputValid = nameIsValid,
+                    emailInputValid = emailIsValid,
+                    dateInputValid = dateIsValid
+                )
+            }
         }
     }
 

@@ -1,26 +1,19 @@
 package com.example.registrationzkb.screens.shared
 
+import android.content.res.Configuration
 import android.widget.CalendarView
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Divider
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.TextField
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.EditCalendar
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import com.example.registrationzkb.ui.theme.RegistrationZKBTheme
 import com.example.registrationzkb.utils.Utils
-import java.util.*
 
 @Composable
 fun ZKBDivider() {
@@ -47,4 +40,35 @@ fun ZKBCalendarView(datePicked: (Int, Int, Int) -> Unit) {
             }
         }
     )
+}
+
+@Composable
+fun DefaultTopBar(title: String) {
+    Column(modifier = Modifier.padding(top = 48.dp)) {
+        Text(
+            text = title,
+            style = MaterialTheme.typography.subtitle1,
+            modifier = Modifier.padding(start = 24.dp),
+            color = MaterialTheme.colors.onSurface
+        )
+
+        ZKBDivider()
+    }
+}
+
+@Preview(
+    name = "Registration Top Bar - Dark",
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    showBackground = true
+)
+@Preview(
+    name = "Registration Top Bar - Light",
+    uiMode = Configuration.UI_MODE_NIGHT_NO,
+    showBackground = true
+)
+@Composable
+fun RegistrationTopBarPreview() {
+    RegistrationZKBTheme {
+        DefaultTopBar(title = "Registration")
+    }
 }

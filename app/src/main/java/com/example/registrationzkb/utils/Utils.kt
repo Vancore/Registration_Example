@@ -1,5 +1,6 @@
 package com.example.registrationzkb.utils
 
+import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Pattern
 
@@ -31,5 +32,19 @@ class Utils {
                     "[a-zA-Z0-9][a-zA-Z0-9\\-]{1,25}" +
                     ")+"
         )
+
+        fun specificDateToCalendar(year: Int, month: Int, day: Int): Date {
+            val maximumCalendarTime = Calendar.getInstance()
+            maximumCalendarTime[Calendar.YEAR] = year
+            maximumCalendarTime[Calendar.MONTH] = month
+            maximumCalendarTime[Calendar.DAY_OF_MONTH] = day
+            return maximumCalendarTime.time
+        }
+
+        fun convertDateToString(time: Long): String {
+            val date = Date(time)
+            val format = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+            return format.format(date)
+        }
     }
 }
