@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.regex.Pattern
 import javax.inject.Inject
 
 data class ValidationState(
@@ -41,7 +42,8 @@ class ValidationUseCase @Inject constructor(
     }
 
     private fun validateEmail(email: String): Boolean {
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() // ToDo: Allow only input with at least 2 chars after '.'
+        if (email.isEmpty()) return false
+        return EMAIL_ADDRESS_CUSTOM.matcher(email).matches() // ToDo: Allow only input with at least 2 chars after '.'
     }
 
     private fun validateDate(date: Long): Boolean {
@@ -71,6 +73,16 @@ class ValidationUseCase @Inject constructor(
             maximumCalendarTime[Calendar.DAY_OF_MONTH] = 31
             return maximumCalendarTime.time
         }
+
+        val EMAIL_ADDRESS_CUSTOM: Pattern = Pattern.compile(
+            "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
+                    "\\@" +
+                    "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+                    "(" +
+                    "\\." +
+                    "[a-zA-Z0-9][a-zA-Z0-9\\-]{1,25}" +
+                    ")+"
+        )
     }
 
 }
