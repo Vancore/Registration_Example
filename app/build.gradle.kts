@@ -3,7 +3,6 @@ plugins {
     id("dagger.hilt.android.plugin")
     kotlin ("android")
     kotlin("kapt")
-    //id("com.google.protobuf") version "0.8.17" apply true
 }
 
 android {
@@ -11,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "vancore.registrationzkb"
-        minSdk = 21
+        minSdk = 26
         targetSdk =  31
         versionCode = 1
         versionName = "1.0"
@@ -85,15 +84,14 @@ dependencies {
     kapt(Dependencies.hiltCompiler)
 
     // Coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.1.1")
+    implementation(Dependencies.coroutinesAndroid)
+    implementation(Dependencies.coroutinesPlayServices)
 
     // Jetpack Datastore
     implementation(Dependencies.dataStore)
     implementation(Dependencies.dataStoreCore)
     implementation(Dependencies.dataStorePreferences)
     implementation(Dependencies.dataStorePreferencesCore)
-    implementation(Dependencies.protobuf)
 
     // tryout
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")

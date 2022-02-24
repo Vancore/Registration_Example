@@ -34,11 +34,11 @@ class Utils {
         )
 
         fun specificDateToCalendar(year: Int, month: Int, day: Int): Date {
-            val maximumCalendarTime = Calendar.getInstance()
-            maximumCalendarTime[Calendar.YEAR] = year
-            maximumCalendarTime[Calendar.MONTH] = month
-            maximumCalendarTime[Calendar.DAY_OF_MONTH] = day
-            return maximumCalendarTime.time
+            val calendar = Calendar.getInstance()
+            calendar[Calendar.YEAR] = year
+            calendar[Calendar.MONTH] = month
+            calendar[Calendar.DAY_OF_MONTH] = day
+            return calendar.time
         }
 
         fun convertDateToString(time: Long): String {

@@ -12,6 +12,7 @@ enum class AppScreens {
         fun fromRoute(route: String?): AppScreens =
             when (route?.substringBefore("/")) {
                 RegistrationForm.name -> RegistrationForm
+                Success.name -> Success
                 else -> throw IllegalArgumentException("Route $route is not recognized.")
             }
     }

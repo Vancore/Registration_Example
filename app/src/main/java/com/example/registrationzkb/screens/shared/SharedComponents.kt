@@ -2,6 +2,7 @@ package com.example.registrationzkb.screens.shared
 
 import android.content.res.Configuration
 import android.widget.CalendarView
+import android.widget.DatePicker
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
@@ -14,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.example.registrationzkb.ui.theme.RegistrationZKBTheme
 import com.example.registrationzkb.utils.Utils
+import java.util.*
 
 @Composable
 fun ZKBDivider() {
@@ -27,16 +29,20 @@ fun ZKBDivider() {
 }
 
 @Composable
-fun ZKBCalendarView(datePicked: (Int, Int, Int) -> Unit) {
+fun ZKBCalendarView(
+    lastPickedDate: Date,
+    datePicked: (Int, Int, Int) -> Unit
+) {
     AndroidView({
-        val calendarView = CalendarView(it)
-        calendarView.maxDate = Utils.maximumCalendarTime().time
-        calendarView
+        val datePicker = DatePicker(it)
+        datePicker.maxDate = Utils.maximumCalendarTime().time
+        datePicker.updateDate(lastPickedDate.year + 1900, lastPickedDate.month, lastPickedDate.date)
+        datePicker
     },
         Modifier.wrapContentSize(),
         update = { view ->
-            view.setOnDateChangeListener { _, year, month, day ->
-                datePicked(year, month, day)
+            view.setOnDateChangedListener { _, year, month, day ->
+                if(day != 31) datePicked(year, month, day)
             }
         }
     )

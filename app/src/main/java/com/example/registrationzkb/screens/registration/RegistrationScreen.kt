@@ -23,12 +23,11 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import androidx.navigation.NavHostController
-import com.example.registrationzkb.AppScreens
 import com.example.registrationzkb.data.RegistrationInput
 import com.example.registrationzkb.screens.shared.DefaultTopBar
 import com.example.registrationzkb.screens.shared.ZKBCalendarView
 import com.example.registrationzkb.ui.theme.RegistrationZKBTheme
+import com.example.registrationzkb.utils.Utils
 import com.example.registrationzkb.utils.Utils.Companion.convertDateToString
 import com.example.registrationzkb.utils.Utils.Companion.specificDateToCalendar
 import com.google.accompanist.insets.ProvideWindowInsets
@@ -37,7 +36,6 @@ import java.util.*
 @Composable
 fun RegistrationScreen(
     registrationViewModel: RegistrationViewModel,
-    navHostController: NavHostController,
     validationSuccess: () -> Unit
 ) {
 
@@ -57,7 +55,7 @@ fun RegistrationScreen(
     }
 
     ProvideWindowInsets(windowInsetsAnimationsEnabled = true) {
-        Scaffold(topBar = { DefaultTopBar(title = "Registration") }) {
+        Scaffold(topBar = { DefaultTopBar(title = "Registrierung") }) {
             RegistrationScreenContent(
                 errorInName = !validationState.nameInputValid,
                 errorInEmail = !validationState.emailInputValid,
@@ -79,7 +77,7 @@ fun RegistrationScreenContent(
     val (currentEmailInput, emailChange) = remember { mutableStateOf("") }
     val (currentBirthdayInput, birthdayChange) = remember { mutableStateOf("") }
 
-    var selectedDate by remember { mutableStateOf(Date()) }
+    var selectedDate by remember { mutableStateOf(Utils.maximumCalendarTime()) }
     var showCalendar by remember { mutableStateOf(false) }
     var showErrors by remember { mutableStateOf(false) }
 
@@ -93,12 +91,12 @@ fun RegistrationScreenContent(
         TextField(
             value = currentNameInput,
             onValueChange = nameChange,
-            label = { Text("Your Name") },
+            label = { Text("Ihr Name") },
             keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next)
         )
         if (showErrors && errorInName) {
             Text(
-                text = "The Name input must not be empty",
+                text = "Das Namensfeld darf nicht leer sein",
                 color = MaterialTheme.colors.error,
                 modifier = Modifier.padding(vertical = 8.dp, horizontal = 24.dp)
             )
@@ -120,7 +118,7 @@ fun RegistrationScreenContent(
         )
         if (showErrors && errorInEmail) {
             Text(
-                text = "Please provide a valid Email Address",
+                text = "Bitte geben Sie eine valide Email an",
                 color = MaterialTheme.colors.error,
                 modifier = Modifier.padding(vertical = 8.dp, horizontal = 24.dp)
             )
@@ -132,7 +130,7 @@ fun RegistrationScreenContent(
             TextField(
                 value = currentBirthdayInput,
                 onValueChange = birthdayChange,
-                label = { Text("Birthday") },
+                label = { Text("Geburtstag") },
                 keyboardOptions = KeyboardOptions.Default.copy(
                     keyboardType = KeyboardType.Number,
                     imeAction = ImeAction.Go
@@ -158,7 +156,7 @@ fun RegistrationScreenContent(
         }
         if (showErrors && errorInDate) {
             Text(
-                text = "Please provide a valid Date for your birthday",
+                text = "Bite geben sie einen gültigen Geburtstag an",
                 color = MaterialTheme.colors.error,
                 modifier = Modifier.padding(vertical = 8.dp, horizontal = 24.dp)
             )
@@ -172,7 +170,9 @@ fun RegistrationScreenContent(
                         .border(BorderStroke(0.dp, Color.Transparent), RoundedCornerShape(8.dp)),
                     contentAlignment = Alignment.Center
                 ) {
-                    ZKBCalendarView(datePicked = { year, month, day ->
+                    ZKBCalendarView(
+                        lastPickedDate = selectedDate,
+                        datePicked = { year, month, day ->
                         val date = specificDateToCalendar(year, month, day)
                         birthdayChange(convertDateToString(date.time))
                         selectedDate = date
@@ -194,7 +194,7 @@ fun RegistrationScreenContent(
             )
             showErrors = true
         }) {
-            Text(text = "Register")
+            Text(text = "Registrieren")
         }
     }
 }
@@ -212,7 +212,7 @@ fun RegistrationScreenContent(
 @Composable
 fun RegistrationScreenPreview() {
     RegistrationZKBTheme {
-        Scaffold(topBar = { DefaultTopBar(title = "Registration") }) {
+        Scaffold(topBar = { DefaultTopBar(title = "Registrierung") }) {
             RegistrationScreenContent(
                 errorInName = false,
                 errorInEmail = true,

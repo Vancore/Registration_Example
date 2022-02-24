@@ -65,4 +65,10 @@ object Dependencies {
     const val hiltCompiler = "com.google.dagger:hilt-compiler:$hiltVersion"
     const val hilt = "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
 
+    /// Coroutines
+    const val coroutinesAndroidVersion = "1.5.2"
+    const val coroutinesPlayServicesVersion = "1.1.1"
+
+    const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesAndroidVersion"
+    const val coroutinesPlayServices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:$coroutinesPlayServicesVersion"
 }

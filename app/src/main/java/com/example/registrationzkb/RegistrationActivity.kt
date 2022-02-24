@@ -14,12 +14,14 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.registrationzkb.screens.registration.RegistrationScreen
 import com.example.registrationzkb.screens.registration.RegistrationViewModel
 import com.example.registrationzkb.screens.success.SuccessScreen
 import com.example.registrationzkb.screens.success.SuccessViewModel
 import com.example.registrationzkb.ui.theme.RegistrationZKBTheme
+import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,9 +31,7 @@ class RegistrationActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
-            Surface(color = MaterialTheme.colors.background) {
-                RegistrationApp()
-            }
+            RegistrationApp()
         }
     }
 }
@@ -39,14 +39,18 @@ class RegistrationActivity : ComponentActivity() {
 @Composable
 fun RegistrationApp() {
     RegistrationZKBTheme {
-        val systemUiController = rememberSystemUiController()
-        SideEffect {
-            systemUiController.setSystemBarsColor(Color.Transparent, darkIcons = false)
+        ProvideWindowInsets {
+            val systemUiController = rememberSystemUiController()
+            SideEffect {
+                systemUiController.setSystemBarsColor(Color.Transparent, darkIcons = false)
+            }
+
+            val navController = rememberNavController()
+            val backStackEntry = navController.currentBackStackEntryAsState()
+            //val currentScreen = AppScreens.fromRoute(backStackEntry.value?.destination?.route)
+
+            RegistrationNavHost(navHostController = navController)
         }
-
-        val navController = rememberNavController()
-
-        RegistrationNavHost(navHostController = navController)
     }
 }
 
@@ -61,7 +65,6 @@ fun RegistrationNavHost(navHostController: NavHostController) {
             val registrationViewModel = hiltViewModel<RegistrationViewModel>()
             RegistrationScreen(
                 registrationViewModel = registrationViewModel,
-                navHostController = navHostController,
                 validationSuccess = {
                     navHostController.navigate(route = AppScreens.Success.name)
                 }
@@ -72,5 +75,6 @@ fun RegistrationNavHost(navHostController: NavHostController) {
             val successViewModel = hiltViewModel<SuccessViewModel>()
             SuccessScreen(successViewModel = successViewModel)
         }
+
     }
 }
