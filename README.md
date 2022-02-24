@@ -43,8 +43,6 @@ This project follows the MVVM pattern. I was experimenting with Jetpack Compose 
 * Currently all Entities are also used to display in the UI, this can be separated
 
 ## Dependencies
-* Google Support Libraries
-* Multi-dex (to be removed)
 * [Compose / Navigation Compose](https://developer.android.com/jetpack/compose/documentation)
 * [Jetpack DataStore Preferences](https://developer.android.com/topic/libraries/architecture/datastore?gclid=CjwKCAiA9tyQBhAIEiwA6tdCrNXCs46cLLqvJViHPqk2s4y2QtIgVcTm_3vkazxJ2p6oX5_9cQa6mhoC1OwQAvD_BwE&gclsrc=aw.ds)
 * [Dagger Hilt](https://github.com/google/dagger/tree/master/java/dagger/hilt)
