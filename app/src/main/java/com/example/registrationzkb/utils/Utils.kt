@@ -41,8 +41,13 @@ class Utils {
             return calendar.time
         }
 
-        fun convertDateToString(time: Long): String {
+        fun convertLongDateToString(time: Long): String {
             val date = Date(time)
+            val format = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+            return format.format(date)
+        }
+
+        fun convertDateToString(date: Date): String {
             val format = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
             return format.format(date)
         }

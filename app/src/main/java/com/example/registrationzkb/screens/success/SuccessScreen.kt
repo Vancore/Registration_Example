@@ -39,7 +39,7 @@ fun SuccessScreen(
             SuccessScreenContent(
                 name = registrationInput.name,
                 email = registrationInput.email,
-                birthday = Utils.convertDateToString(registrationInput.birthday)
+                birthday = Utils.convertLongDateToString(registrationInput.birthday)
             )
         }
     }

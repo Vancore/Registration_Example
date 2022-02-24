@@ -29,6 +29,7 @@ import com.example.registrationzkb.screens.shared.ZKBCalendarView
 import com.example.registrationzkb.ui.theme.RegistrationZKBTheme
 import com.example.registrationzkb.utils.Utils
 import com.example.registrationzkb.utils.Utils.Companion.convertDateToString
+import com.example.registrationzkb.utils.Utils.Companion.convertLongDateToString
 import com.example.registrationzkb.utils.Utils.Companion.specificDateToCalendar
 import com.google.accompanist.insets.ProvideWindowInsets
 
@@ -51,18 +52,18 @@ fun RegistrationScreen(
             )
             validationSuccess()
         }
-    } else {
-        ProvideWindowInsets(windowInsetsAnimationsEnabled = true) {
-            Scaffold(topBar = { DefaultTopBar(title = "Registrierung") }) {
-                RegistrationScreenContent(
-                    errorInName = !validationState.nameInputValid,
-                    errorInEmail = !validationState.emailInputValid,
-                    errorInDate = !validationState.dateInputValid,
-                    validateInput = {
-                        registrationViewModel.validateInput(it)
-                    }
-                )
-            }
+    }
+
+    ProvideWindowInsets(windowInsetsAnimationsEnabled = true) {
+        Scaffold(topBar = { DefaultTopBar(title = "Registrierung") }) {
+            RegistrationScreenContent(
+                errorInName = !validationState.nameInputValid,
+                errorInEmail = !validationState.emailInputValid,
+                errorInDate = !validationState.dateInputValid,
+                validateInput = {
+                    registrationViewModel.validateInput(it)
+                }
+            )
         }
     }
 }
@@ -129,7 +130,7 @@ fun RegistrationScreenContent(
 
         Box {
             TextField(
-                value = currentBirthdayInput,
+                value = convertDateToString(selectedDate),
                 onValueChange = birthdayChange,
                 label = { Text("Geburtstag") },
                 keyboardOptions = KeyboardOptions.Default.copy(
@@ -175,7 +176,7 @@ fun RegistrationScreenContent(
                         lastPickedDate = selectedDate,
                         datePicked = { year, month, day ->
                             val date = specificDateToCalendar(year, month, day)
-                            birthdayChange(convertDateToString(date.time))
+                            birthdayChange(convertLongDateToString(date.time))
                             selectedDate = date
                             showCalendar = !showCalendar
                         })
