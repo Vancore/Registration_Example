@@ -20,6 +20,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.registrationzkb.screens.shared.DefaultTopBar
 import com.example.registrationzkb.ui.theme.RegistrationZKBTheme
 import com.example.registrationzkb.utils.Utils
@@ -27,7 +28,7 @@ import com.google.accompanist.insets.ProvideWindowInsets
 
 @Composable
 fun SuccessScreen(
-    successViewModel: SuccessViewModel
+    successViewModel: SuccessViewModel = hiltViewModel()
 ) {
 
     val loadInputState by remember { successViewModel.registrationInput }.collectAsState()

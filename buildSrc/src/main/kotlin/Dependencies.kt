@@ -54,7 +54,7 @@ object Dependencies {
     const val landscapistGlide = "com.github.skydoves:landscapist-glide:$landscapistGlideVersion"
 
     /// Navigation
-    const val navigationComposeVersion = "2.4.0-rc01"
+    const val navigationComposeVersion = "2.4.1"
 
     const val navigationCompose = "androidx.navigation:navigation-compose:$navigationComposeVersion"
 

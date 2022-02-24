@@ -1,7 +1,6 @@
 package com.example.registrationzkb.screens.registration
 
 import android.content.res.Configuration
-import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -23,6 +22,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.registrationzkb.data.RegistrationInput
 import com.example.registrationzkb.screens.shared.DefaultTopBar
 import com.example.registrationzkb.screens.shared.ZKBCalendarView
@@ -31,39 +31,41 @@ import com.example.registrationzkb.utils.Utils
 import com.example.registrationzkb.utils.Utils.Companion.convertDateToString
 import com.example.registrationzkb.utils.Utils.Companion.specificDateToCalendar
 import com.google.accompanist.insets.ProvideWindowInsets
-import java.util.*
 
 @Composable
 fun RegistrationScreen(
-    registrationViewModel: RegistrationViewModel,
+    registrationViewModel: RegistrationViewModel = hiltViewModel(),
     validationSuccess: () -> Unit
 ) {
 
     val validationState by registrationViewModel.validationState.collectAsState()
 
     if (validationState.inputIsValid) {
-        registrationViewModel.saveInputLocally(
-            RegistrationInput(
-                name = validationState.nameInput,
-                email = validationState.emailInput,
-                birthday = validationState.dateInput,
-            )
-        )
         LaunchedEffect("") {
+            registrationViewModel.saveInputLocally(
+                RegistrationInput(
+                    validationState.nameInput,
+                    validationState.emailInput,
+                    validationState.dateInput
+                )
+            )
             validationSuccess()
+        }
+    } else {
+        ProvideWindowInsets(windowInsetsAnimationsEnabled = true) {
+            Scaffold(topBar = { DefaultTopBar(title = "Registrierung") }) {
+                RegistrationScreenContent(
+                    errorInName = !validationState.nameInputValid,
+                    errorInEmail = !validationState.emailInputValid,
+                    errorInDate = !validationState.dateInputValid,
+                    validateInput = {
+                        registrationViewModel.validateInput(it)
+                    }
+                )
+            }
         }
     }
 
-    ProvideWindowInsets(windowInsetsAnimationsEnabled = true) {
-        Scaffold(topBar = { DefaultTopBar(title = "Registrierung") }) {
-            RegistrationScreenContent(
-                errorInName = !validationState.nameInputValid,
-                errorInEmail = !validationState.emailInputValid,
-                errorInDate = !validationState.dateInputValid,
-                validateInput = registrationViewModel::validateInput
-            )
-        }
-    }
 }
 
 @Composable
@@ -173,11 +175,11 @@ fun RegistrationScreenContent(
                     ZKBCalendarView(
                         lastPickedDate = selectedDate,
                         datePicked = { year, month, day ->
-                        val date = specificDateToCalendar(year, month, day)
-                        birthdayChange(convertDateToString(date.time))
-                        selectedDate = date
-                        showCalendar = !showCalendar
-                    })
+                            val date = specificDateToCalendar(year, month, day)
+                            birthdayChange(convertDateToString(date.time))
+                            selectedDate = date
+                            showCalendar = !showCalendar
+                        })
                 }
             }
         }
