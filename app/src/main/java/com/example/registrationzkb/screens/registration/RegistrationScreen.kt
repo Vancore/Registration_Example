@@ -65,7 +65,6 @@ fun RegistrationScreen(
             }
         }
     }
-
 }
 
 @Composable

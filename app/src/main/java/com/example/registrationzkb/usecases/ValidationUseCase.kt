@@ -67,4 +67,18 @@ class ValidationUseCase @Inject constructor(
         val inputDate = Date(date)
         return inputDate.after(minimumCalendarTime()) && inputDate.before(maximumCalendarTime())
     }
+
+    fun clearInput(){
+        _validationState.update {
+            it.copy(
+                inputIsValid = false,
+                nameInputValid = false,
+                emailInputValid = false,
+                dateInputValid = false,
+                nameInput = "",
+                emailInput = "",
+                dateInput = 0L
+            )
+        }
+    }
 }
