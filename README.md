@@ -55,12 +55,10 @@ This project follows the MVVM pattern. I was experimenting with Jetpack Compose 
 - follows - 
 
 ## Cookbook
-Here the current architecture step by step:
-
-[![as24-architecture](/docs/art/as24-architecture-step.png)](#architecture)
+The current architecture in a nutshell:
 
 1) **Data**: Contains all models and the database
 2) **DI**: Handling of the dependency injection with Hilt
-3) **UI/Screens**: UI for the different screens including their responsive viewModels
+3) **UI/Screens**: UI for the different composable screens including their responsive viewModels
 4) **Usecases**: Reusable and providable/injectable instances for business logic
 5) **Utils**: Util classes, e.g. date converter etc., can also contain extensions
