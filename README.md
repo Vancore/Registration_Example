@@ -19,7 +19,7 @@ Provides 3 input fields:
 - Email
 - Date
 
-You can jump from textfield to textfield by just using the keyboard. All fields are validated when pressing the registration button. When the validation fails, an error text is shown below the respective field. When the validation fails, the user is redirected to the success page, showing all the data from the 3 input fields.
+You can jump from textfield to textfield by just using the keyboard. All fields are validated when pressing the registration button. When the validation fails, an error text is shown below the respective field. When the validation is successful, the user is redirected to the success page, showing all the data from the 3 input fields.
 
 You can navigate back and register anew.
 
