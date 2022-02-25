@@ -10,6 +10,7 @@ object Dependencies {
     const val appCompat = "androidx.appcompat:appcompat:$appCompatVersion"
     const val androidMaterial = "com.google.android.material:material:$androidMaterialVersion"
     const val androidXLifeCycleKtx = "androidx.lifecycle:lifecycle-runtime-ktx:$androidXLifeCycleKtxVersion"
+    const val androidXLifeCycle = "androidx.lifecycle:lifecycle-viewmodel-ktx:$androidXLifeCycleKtxVersion"
 
     /// Compose
     const val composeVersion = "1.1.0"
@@ -35,13 +36,11 @@ object Dependencies {
 
     /// Jetpack DataStore - preferences maybe for later use
     const val dataStoreVersion = "1.0.0"
-    const val protobufVersion = "3.18.0"
 
     const val dataStore = "androidx.datastore:datastore:$dataStoreVersion"
     const val dataStoreCore = "androidx.datastore:datastore-core:$dataStoreVersion"
     const val dataStorePreferences = "androidx.datastore:datastore-preferences:$dataStoreVersion"
     const val dataStorePreferencesCore = "androidx.datastore:datastore-preferences-core:$dataStoreVersion"
-    const val protobuf = "com.google.protobuf:protobuf-javalite:$protobufVersion"
 
     /// Accompanist
     const val accompanistVersion = "0.20.3"
@@ -68,7 +67,17 @@ object Dependencies {
     /// Coroutines
     const val coroutinesAndroidVersion = "1.5.2"
     const val coroutinesPlayServicesVersion = "1.1.1"
+    const val coroutinesTestVersion = "1.4.2"
 
     const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesAndroidVersion"
     const val coroutinesPlayServices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:$coroutinesPlayServicesVersion"
+
+    /// Testing
+    const val mockitoVersion = "3.6.28"
+    const val junitVersion = "4.12"
+    const val coroutineTestingVersion = "1.4.2"
+
+    const val mockito = "org.mockito:mockito-core:$mockitoVersion"
+    const val junit = "junit:junit:$junitVersion"
+    const val kotlinxCoroutineTesting = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutineTestingVersion"
 }

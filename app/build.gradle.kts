@@ -54,6 +54,7 @@ dependencies {
     implementation(Dependencies.appCompat)
     implementation(Dependencies.androidMaterial)
     implementation(Dependencies.androidXLifeCycleKtx)
+    implementation(Dependencies.androidXLifeCycle)
 
     // Jetpack Compose
     implementation(Dependencies.composeUI) // Tooling support (Previews, etc.)
@@ -95,4 +96,9 @@ dependencies {
 
     // tryout
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+
+    /// Testing
+    testImplementation(Dependencies.mockito)
+    testImplementation(Dependencies.junit)
+    testImplementation(Dependencies.kotlinxCoroutineTesting)
 }
