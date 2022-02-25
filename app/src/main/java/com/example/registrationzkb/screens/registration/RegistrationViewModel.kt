@@ -25,8 +25,11 @@ class RegistrationViewModel @Inject constructor(
     fun saveInputLocally(registrationInput: RegistrationInput) {
         viewModelScope.launch(Dispatchers.IO) {
             dataStoreManager.saveUserInput(registrationInput = registrationInput)
-            validationUseCase.clearInput()
         }
+    }
+
+    fun clearInput(){
+        validationUseCase.clearInput()
     }
 
 }

@@ -41,30 +41,34 @@ fun RegistrationScreen(
 
     val validationState by registrationViewModel.validationState.collectAsState()
 
-    if (validationState.inputIsValid) {
-        LaunchedEffect("") {
-            registrationViewModel.saveInputLocally(
-                RegistrationInput(
-                    validationState.nameInput,
-                    validationState.emailInput,
-                    validationState.dateInput
+    if (!validationState.inputIsValid) {
+        ProvideWindowInsets(windowInsetsAnimationsEnabled = true) {
+            Scaffold(topBar = { DefaultTopBar(title = "Registrierung") }) {
+                RegistrationScreenContent(
+                    errorInName = !validationState.nameInputValid || validationState.inputIsValid,
+                    errorInEmail = !validationState.emailInputValid || validationState.inputIsValid,
+                    errorInDate = !validationState.dateInputValid || validationState.inputIsValid,
+                    validateInput = {
+                        registrationViewModel.validateInput(it)
+                    }
                 )
-            )
-            validationSuccess()
+            }
         }
-    }
+    } else {
+        if (validationState.inputIsValid) {
+            LaunchedEffect("") {
+                registrationViewModel.saveInputLocally(
+                    RegistrationInput(
+                        validationState.nameInput,
+                        validationState.emailInput,
+                        validationState.dateInput
+                    )
+                )
+                validationSuccess()
+                registrationViewModel.clearInput()
+            }
+        }
 
-    ProvideWindowInsets(windowInsetsAnimationsEnabled = true) {
-        Scaffold(topBar = { DefaultTopBar(title = "Registrierung") }) {
-            RegistrationScreenContent(
-                errorInName = !validationState.nameInputValid,
-                errorInEmail = !validationState.emailInputValid,
-                errorInDate = !validationState.dateInputValid,
-                validateInput = {
-                    registrationViewModel.validateInput(it)
-                }
-            )
-        }
     }
 }
 
