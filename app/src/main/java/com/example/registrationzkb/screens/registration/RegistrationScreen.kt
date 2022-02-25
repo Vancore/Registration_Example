@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
@@ -55,20 +56,19 @@ fun RegistrationScreen(
             }
         }
     } else {
-        if (validationState.inputIsValid) {
-            LaunchedEffect("") {
-                registrationViewModel.saveInputLocally(
-                    RegistrationInput(
-                        validationState.nameInput,
-                        validationState.emailInput,
-                        validationState.dateInput
-                    )
+        LaunchedEffect("") {
+            registrationViewModel.saveInputLocally(
+                RegistrationInput(
+                    validationState.nameInput,
+                    validationState.emailInput,
+                    validationState.dateInput
                 )
-                validationSuccess()
-                registrationViewModel.clearInput()
-            }
+            )
         }
-
+        DisposableEffect(LocalLifecycleOwner.current) {
+            validationSuccess()
+            onDispose { registrationViewModel.clearInput() }
+        }
     }
 }
 
