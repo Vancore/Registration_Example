@@ -56,15 +56,13 @@ fun RegistrationScreen(
             }
         }
     } else {
-        LaunchedEffect("") {
-            registrationViewModel.saveInputLocally(
-                RegistrationInput(
-                    validationState.nameInput,
-                    validationState.emailInput,
-                    validationState.dateInput
-                )
+        registrationViewModel.saveInputLocally(
+            RegistrationInput(
+                validationState.nameInput,
+                validationState.emailInput,
+                validationState.dateInput
             )
-        }
+        )
         DisposableEffect(LocalLifecycleOwner.current) {
             validationSuccess()
             onDispose { registrationViewModel.clearInput() }
